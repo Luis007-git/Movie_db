@@ -1,0 +1,37 @@
+# Ignore object files
+*.o
+*.obj
+
+# Ignore compiled binaries / executables
+main
+test_cdb
+test_interface
+# Or ignore all executables (optional)
+# *.out
+
+# Ignore debug symbol files on macOS
+*.dSYM/
+
+# Ignore temporary files created by editors
+*~
+*.swp
+*.swo
+
+# Ignore compiled libraries
+*.a
+*.so
+*.dll
+*.dylib
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore build folders if you have any
+/build/
+/bin/
+/out/
+
+# Ignore log files
+*.log
+
