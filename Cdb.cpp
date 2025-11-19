@@ -3,6 +3,8 @@
 #include <sstream> 
 #include <algorithm> 
 #include <iostream> 
+//can delete the name space later 
+using namespace std;
 int search(const string& word,char c);
 
 //adds file values into the items vector seperates the string from ints using the ',' as a parser
@@ -18,7 +20,7 @@ void Database::load_from_file(){
     std::string movie_name;
     float movie_rating; 
     while (file >> std::ws && std::getline(file, movie_name, ',') && file >> movie_rating) {
-            items.push_back({movie_name, movie_rating});
+            items.push_back(Database::Movie{movie_name, movie_rating});
     }
 }
 //time Complexity O(n) //returns index to the movie iif it exists -1 if not
@@ -77,9 +79,7 @@ bool Database::add_movie(const string& name, float rating){
         return false; 
     }
 
-    Movie m1;
-    m1.name = name; 
-    m1.rating = rating;
+    Movie m1(name,rating);
     items.push_back(m1);
     //aka added 
     return true; 
