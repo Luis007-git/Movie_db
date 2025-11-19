@@ -12,7 +12,7 @@ int main() {
     // db1.add_movie("Blade Runner",static_cast<float>(8.5));
     // db1.display_by_rating(); 
     // cout << "after alpha: " << endl; 
-    db1.add_movie("Toys Story 4",11);
+    db1.add_movie("Toys Story 3",8);
     cout << "displaying vector: \n";
     db1.display_vec(); 
     cout << "displaying db: \n"; 

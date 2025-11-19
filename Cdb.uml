@@ -1,0 +1,44 @@
+@startuml
+
+title Database Class Diagram
+
+class Database {
+    - vector<Movie> items
+    - string file_name
+
+    + Database()
+    + Database(file_name : string)
+
+    + load_from_file() : void
+    + add_file(file_name :  string) : void
+    + display_vec() : void
+    + movie_search(movie : string) : int
+    + is_file_empty() : bool
+    + display_db() : void
+    + populate_vec() : void
+    + add_movie(name : string, rating : float) : void
+    + display_in_alpha() : void
+    + display_by_rating() : void
+    + delete_movie(movie_name : string) : void
+    + save_to_file() : void
+    + ~Database()
+}
+
+class Movie {
+    + name : string
+    + rating : float
+}
+
+class compare_by_name {
+    + operator()(m1 : Movie, m2 : Movie) : bool
+}
+
+class compare_by_rating {
+    + operator()(m1 : Movie, m2 : Movie) : bool
+}
+
+Database "*" --> Movie : contains >
+Database --> compare_by_name : uses >
+Database --> compare_by_rating : uses >
+
+@enduml
