@@ -2,45 +2,40 @@
 #define CDB_H
 
 #include <vector> 
-//dont use namespace std' nad practice
+#include <cmath>
+#include<string>
+#include<vector>
+//dont use namespace std' bad practice in the h file
 //using namespace std;
 /*
 Luis Aguilar
 File name: Cdb.h
 created:03/10/2022
 Edited:
-11/19/2025
+11/24/2025
 Problem: Creating a database for movies. Storing the information in a seperate file.
-Using a vector as a way to sort out the movies or to organize them in whatever way. WIll need user interface after this
+Using a vector as a way to sort out the movies or to organize them in whatever way. Main purpose learning C++ classes and data strucures 
 */
 //****Not done still working on it. Its just the latest I've been doing*****
 //needs backup copy db file in case you lose data // still needs to be added
 //edited nov 25 added test files for cdb and interface
 //made stuff const where applicable and passed by ref 
-int search(std::string word,char c);
+//next going to add review part 
+
+
+
+//int search(std::string word,char c);
 class Database {
-    private: 
-        //created the datatype movie which consist of name and rating of the movie
+    public: 
+               //created the datatype movie which consist of name and rating of the movie
         struct Movie{
             std::string name; 
             float rating; 
-            Movie(const std::string& n, float r): name(n), rating(std::round(r * 10.0f) / 10.0f) {}
+            // the rounding is not really needed in here we can just add that when we take user input
+            Movie(const std::string& n, float r): name(n), rating(std::roundf(r * 10.0f) / 10.0f) {}
         };
-        //less than struct is used for custom sort. Where string sorts by string in alphabetic order and
-        //rating sorts by movie rating where the higher ratings get placed at the begining of vec
 
-        /// maybe delete these and use lambdas 
-        struct compare_by_name
-        {
-            inline bool operator()(const Movie&m1, const Movie&m2){
-                return (m1.name< m2.name);
-            }
-        };
-        struct compare_by_rating{
-            inline bool operator() (const Movie&m1, const Movie&m2){
-                return(m1.rating > m2.rating);
-            }
-        };
+    private: 
         //my Db  has a vector of movies to help manipulate the data
         std::vector<Movie>items;
         //redundant not needed info is already in items.size() 
@@ -53,7 +48,6 @@ class Database {
             load_from_file();
         };
         void load_from_file();//populated the vector with movies
-        void add_file(const std::string& file_name); //adds a file to the database and then it should run ->load  from file 
         void display_vec(); //displays contents inside the vec
         int movie_search(const std::string& movie); //searches for a specific movie and returns the rating
         bool is_file_empty();//just checks to see if our file is empty
@@ -62,12 +56,17 @@ class Database {
         //void populate_vec();//fills in the vector with the items in database
         bool add_movie(const std::string& name, float rating); //adds a new movie to the DB bool return because you want to have a way to tell the people if the movie was added or not without cout
         //prob have to move the content to a diff member function doesnt make sense to have it here
-        void display_in_alpha(); //sorts vector  by movie name A-Z
-        void display_by_rating();//sorts vector by rating 10-0;
+        void sort_in_alpha(); //sorts vector  by movie name A-Z
+        void sort_by_rating();//sorts vector by rating 10-0;
         //working here
-        void delete_movie(const std::string& movie_name);//find the movie by name and then deletes it because your usign a vector deleting a movie is gonna be consuming 
-        void fast_delete(const std::string& movie_name);
+        bool delete_movie(const std::string& movie_name);//find the movie by name and then deletes it because your usign a vector deleting a movie is gonna be consuming 
+        bool fast_delete(const std::string& movie_name);//implamented for fun not rly needed. 
         void save_to_file();
+        //setters
+        void add_file(const std::string& file_name); //adds a file to the database and then it should run ->load  from file 
+        //getter functions
+        const std::vector<Movie>& get_items()const; 
+        std::string get_file_name()const; 
         ~Database() {
         save_to_file();   // automatically called when object is destroyed
         }

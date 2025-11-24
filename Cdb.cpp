@@ -3,6 +3,8 @@
 #include <sstream> 
 #include <algorithm> 
 #include <iostream> 
+#include <vector>
+#include <string>
 //can delete the name space later 
 using namespace std;
 int search(const string& word,char c);
@@ -33,7 +35,9 @@ int Database::movie_search(const string& movie){ // searches for movie and retur
     return -1; // if it doesnt find anything
 }
 bool Database::is_file_empty(){
-    ifstream myfile(file_name); 
+    ifstream myfile(file_name);
+    //well this is tricky so because file doesnt get uploaded till the object dies maybe if they check if file is empty populate it first 
+    this->save_to_file();  
     return myfile.peek() == ifstream::traits_type::eof();
 }
 
@@ -85,32 +89,42 @@ bool Database::add_movie(const string& name, float rating){
     return true; 
 }
 //uses std sort time complexity O(nlogn)
-void Database::display_in_alpha(){ // have to parse out the text to strings and ints
-    sort(items.begin(), items.end(), compare_by_name());// can also overload '<' operator
+void Database::sort_in_alpha(){ // have to parse out the text to strings and ints
+    sort(items.begin(), items.end(), [](const Database::Movie& m1,const Database::Movie& m2 ){
+        return m1.name < m2.name;
+    });// can also overload '<' operator
 }
 //same as alpha. Time complexity: O(nlogn) uses stl sort 
-void Database::display_by_rating(){ //default highest to lowest
-    sort(items.begin(), items.end(), compare_by_rating());
+void Database::sort_by_rating(){ //default highest to lowest
+    sort(items.begin(), items.end(), [](const Database::Movie& m1,const Database::Movie& m2 ){
+        return m1.rating > m2.rating;
+    });
 }
 
 //time complexity is O(n) steps n+n+c
-void Database::delete_movie(const string& movie_name){
+bool Database::delete_movie(const string& movie_name){
     int index = movie_search(movie_name);
     if(index < 0){
-        cout << "cand delet it does not exist ";
+        //bad practice to cout ;( using bool
+        //cout << "cand delet it does not exist ";
+        return false; 
     } 
     //two ways to delete if you care about order or if you dont if you dont its faster 
     items.erase(items.begin() + index);
+    return true;
 }
 
 //time complexity for this deletions is n beceause of movie search steps n+c+c
-void Database::fast_delete(const string& movie_name){
+bool Database::fast_delete(const string& movie_name){
     int index = movie_search(movie_name);
     if(index < 0){
-        cout << "cand delet it does not exist ";
+        // return false instead 
+        //cout << "cand delet it does not exist ";
+        return false; 
     } 
     items[index] = items.back();  
     items.pop_back(); 
+    return true; 
 }
 
 //called when program ends and it populates the file with the things in the items list 
@@ -125,7 +139,14 @@ void Database::save_to_file(){
         my_file << movie.name << ", " << movie.rating << endl;
     }
 }
-
+//return vec 
+const vector<Database::Movie>& Database::get_items()const{
+    return items; 
+}
+//return file name 
+string Database::get_file_name()const{
+    return this->file_name; 
+}
 //helper function used in populate vec 
 //finds any given char in a string  and returns its position int string 0-Intmax
 //if not found return -1
