@@ -5,6 +5,16 @@
 #include <cmath>
 #include<string>
 #include<vector>
+/*
+        Changes needed *******************************
+    change the .txt to a json file format to store more info
+    movie_name, rating, review, user_id-> to show who it belongs to 
+    use user_id to keep track of what belogns to who 
+    change load_from
+    Reason: 
+        Avoids creating new files for every user
+*/
+
 //dont use namespace std' bad practice in the h file
 //using namespace std;
 /*

@@ -165,6 +165,11 @@ int search(const string& word,char c){
 }
 
 
+
+
+
+
+
 //needs cleaning up
 //populates the vector of movies
 //old way to populate vec 
