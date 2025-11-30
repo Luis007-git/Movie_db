@@ -1,4 +1,4 @@
-#include <iostream>
+#include "User_manager.h"
 int main() {
-    std::cout << "hello world";
+    User_manager users1("All_User.json");
 }

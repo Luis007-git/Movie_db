@@ -13,11 +13,15 @@ using json = nlohmann::json;
 class User_manager {
     private:
         std::string user_file; 
+        json j; 
+        int create_unique_id(); 
     public:
-        User_manager(std::string file):user_file(file){};
+        User_manager(std::string file);
         //well i guesss it will return the users file_name if it exist 
-        // returns a user 
-        User* search_user_name(const std::string &name){};
+        // returns a user if found if not calls add_user func
+        User* search_user_name(const std::string &name);
+        //creates user and adds a file for it 
+        void add_user(const std::string user_name);
 };
 
 
