@@ -1,3 +1,20 @@
 {
-    "users": []
+    "current_id": 3,
+    "users": [
+        {
+            "db_file_name": "Amy01cdb.txt",
+            "id": 1,
+            "user_name": "Amy01"
+        },
+        {
+            "db_file_name": "Luis01cdb.txt",
+            "id": 2,
+            "user_name": "Luis01"
+        },
+        {
+            "db_file_name": "Anahi01cdb.txt",
+            "id": 3,
+            "user_name": "Anahi01"
+        }
+    ]
 }

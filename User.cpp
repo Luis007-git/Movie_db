@@ -1,10 +1,6 @@
 #include "User.h"
 #include <string>
 
-//maybe later make sure the length is right and its just letters or however you need them 
-void User::change_username (std::string& new_name){
-    user_name = new_name; 
-}
 //getters
 const std::string& User::get_user_name()const{return this->user_name;};
 const std::string& User::get_file_name()const{return this->file_name;};
@@ -17,5 +13,5 @@ void User::set_file(const std::string& file){
     this->file_name = file; 
 }
 void User::set_user_id(const int id){
-    this->user_name = id; 
+    this->user_id = id; 
 }

@@ -19,13 +19,14 @@ class User {
 
         //well when creating a user it goes to the user_manager if it finds it then good returns a user
         //if it does not find the user you can create a new one 
+        User():user_name(""),user_id(0),file_name(""){};
         User(std::string user, int id, std::string user_file):user_name(user),user_id(id),file_name(user_file){};
         //maybe later make sure the length is right and its just letters or however you need them 
-        void change_username (std::string& new_name);
         //getters
         const std::string& get_user_name()const;
         const std::string& get_file_name()const;
         int get_user_id()const;
+        //setters
         void set_user_name(const std::string& user);
         void set_file(const std::string& file);
         void set_user_id(const int id);
